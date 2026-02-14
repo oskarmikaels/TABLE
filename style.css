@@ -253,3 +253,225 @@ body {
 .grid-item:hover img {
     transform: scale(1.05);
 }
+
+/* ============================================
+   AWWWARDS-STYLE MENU
+   ============================================ */
+
+/* Menu Toggle Button */
+.menu-toggle {
+    position: fixed;
+    bottom: 3rem;
+    right: 3rem;
+    z-index: 1000;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.menu-toggle.active {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.menu-toggle:hover {
+    transform: scale(1.05);
+}
+
+.menu-text,
+.menu-text-close {
+    font-family: 'Moniqa', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #FF9944;
+    text-transform: uppercase;
+    display: block;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-text-close {
+    display: none;
+}
+
+.menu-toggle.active .menu-text {
+    transform: none;
+    opacity: 1;
+}
+
+.menu-toggle.active .menu-text-close {
+    display: none;
+}
+
+/* Menu Overlay - Inline Horizontal */
+.menu-overlay {
+    position: fixed;
+    bottom: 3rem;
+    right: 3rem;
+    width: auto;
+    height: auto;
+    background: transparent;
+    z-index: 1001;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-overlay::before {
+    display: none;
+}
+
+.menu-overlay.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.menu-overlay.active::before {
+    opacity: 1;
+}
+
+/* Menu Navigation */
+.menu-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+    margin-bottom: 0;
+    width: auto;
+    align-items: center;
+}
+
+.menu-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    overflow: visible;
+    padding: 0;
+    border-bottom: none;
+}
+
+.menu-link:last-child {
+    border-bottom: none;
+}
+
+.menu-link-text {
+    font-family: 'Moniqa', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #FF9944;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+}
+
+.menu-link-number {
+    font-family: 'MilkyWalky', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 153, 68, 0.4);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-overlay.active .menu-link-text,
+.menu-overlay.active .menu-link-number {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Stagger animation delays */
+.menu-overlay.active .menu-link:nth-child(1) .menu-link-text,
+.menu-overlay.active .menu-link:nth-child(1) .menu-link-number {
+    transition-delay: 0.1s;
+}
+
+.menu-overlay.active .menu-link:nth-child(2) .menu-link-text,
+.menu-overlay.active .menu-link:nth-child(2) .menu-link-number {
+    transition-delay: 0.2s;
+}
+
+.menu-overlay.active .menu-link:nth-child(3) .menu-link-text,
+.menu-overlay.active .menu-link:nth-child(3) .menu-link-number {
+    transition-delay: 0.3s;
+}
+
+.menu-overlay.active .menu-link:nth-child(4) .menu-link-text,
+.menu-overlay.active .menu-link:nth-child(4) .menu-link-number {
+    transition-delay: 0.4s;
+}
+
+/* Hover Effects */
+.menu-link:hover .menu-link-text {
+    color: #FFB366;
+    transform: translateY(-3px);
+}
+
+.menu-link:hover .menu-link-number {
+    color: rgba(255, 179, 102, 0.7);
+    transform: translateY(-3px);
+}
+
+/* Menu Footer */
+.menu-footer {
+    display: none;
+}
+
+.menu-footer-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.menu-footer-label {
+    font-family: 'MilkyWalky', sans-serif;
+    font-size: 0.65rem;
+    color: rgba(204, 119, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.menu-footer-item a,
+.menu-footer-item span {
+    font-family: 'MilkyWalky', sans-serif;
+    font-size: 0.85rem;
+    color: #CC7700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.menu-footer-item a:hover {
+    color: #FF9933;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .menu-overlay {
+        width: 100vw;
+        padding: 3rem 2rem;
+    }
+    
+    .menu-link-text {
+        font-size: 2.5rem;
+    }
+    
+    .menu-footer {
+        flex-direction: column;
+        gap: 2rem;
+        left: 2rem;
+        right: 2rem;
+    }
+}

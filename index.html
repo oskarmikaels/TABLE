@@ -32,6 +32,46 @@
         <div class="location-line">BROADCASTING SWEDEN</div>
         <div class="location-line">CONNECTED GLOBALLY</div>
     </div>
+
+    <!-- MENU BUTTON -->
+    <button class="menu-toggle" aria-label="Toggle menu">
+        <span class="menu-text">MENU</span>
+        <span class="menu-text-close">CLOSE</span>
+    </button>
+
+    <!-- FULLSCREEN MENU OVERLAY -->
+    <div class="menu-overlay">
+        <nav class="menu-nav">
+            <a href="#work" class="menu-link">
+                <span class="menu-link-text">Work with us</span>
+                <span class="menu-link-number">01</span>
+            </a>
+            <a href="#about" class="menu-link">
+                <span class="menu-link-text">About</span>
+                <span class="menu-link-number">02</span>
+            </a>
+            <a href="#projects" class="menu-link">
+                <span class="menu-link-text">Projects</span>
+                <span class="menu-link-number">03</span>
+            </a>
+            <a href="#contact" class="menu-link">
+                <span class="menu-link-text">Contact</span>
+                <span class="menu-link-number">04</span>
+            </a>
+        </nav>
+        
+        <!-- Menu Footer Info -->
+        <div class="menu-footer">
+            <div class="menu-footer-item">
+                <span class="menu-footer-label">Email</span>
+                <a href="mailto:hello@table.com">hello@table.com</a>
+            </div>
+            <div class="menu-footer-item">
+                <span class="menu-footer-label">Based in</span>
+                <span>Umeå, Sweden</span>
+            </div>
+        </div>
+    </div>
     
     <!-- HERO SECTION -->
     <section class="hero">
@@ -139,6 +179,61 @@
         
         updateClock();
         setInterval(updateClock, 1000);
+
+        // ============================================
+        // MENU TOGGLE FUNCTIONALITY
+        // ============================================
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        // Toggle menu open/close
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menuToggle.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            
+            // Prevent scrolling when menu is open
+            if (menuOverlay.classList.contains('active')) {
+                lenis.stop();
+            } else {
+                lenis.start();
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (menuOverlay.classList.contains('active') && 
+                !menuOverlay.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                lenis.start();
+            }
+        });
+
+        // Prevent menu from closing when clicking inside it
+        menuOverlay.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Close menu when clicking a link
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                lenis.start();
+            });
+        });
+
+        // Close menu on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && menuOverlay.classList.contains('active')) {
+                menuToggle.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                lenis.start();
+            }
+        });
 
         // Auto-stretch text to same width
         function stretchTextToBox() {
