@@ -130,7 +130,8 @@ body {
 
 /* HERO SECTION */
 .hero {
-    position: relative;
+    position: sticky;
+    top: 0;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -203,12 +204,16 @@ body {
 .blog-grid {
     position: relative;
     width: 100%;
-    min-height: 300vh;
-    background: linear-gradient(180deg, #1a0a00 0%, #0a0500 100%);
-    overflow: hidden;
-    padding: 0;
+    min-height: 350vh;
+    background: transparent;
+    overflow: visible;
+    padding: 0 2rem;
     z-index: 2;
-    margin-top: -100vh; /* Dra upp blog-grid för att eliminera 100vh gapet */
+    pointer-events: none;
+}
+
+.blog-grid * {
+    pointer-events: auto;
 }
 
 .grid-columns {
@@ -216,9 +221,7 @@ body {
     gap: 1rem;
     padding: 2rem 0;
     height: 100%;
-    margin-left: -10%;
-    margin-right: -10%;
-    width: 120%;
+    width: 100%;
 }
 
 .grid-column {
@@ -226,11 +229,15 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 .grid-item {
     width: 100%;
-    aspect-ratio: 3/4;
+    aspect-ratio: 1/1;
     overflow: hidden;
     border-radius: 0;
     position: relative;
