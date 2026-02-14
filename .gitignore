@@ -1,0 +1,6 @@
+# Videos - stora filer, hanteras separat
+videos/
+
+# OS files
+.DS_Store
+*.log
