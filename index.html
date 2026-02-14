@@ -50,19 +50,52 @@
         
     </section>
 
-    </section>
-
-   <!-- BLOG GRID (bakom TABLE-texten) -->
+   <!-- BLOG GRID -->
     <section class="blog-grid">
-        <div class="grid-container">
-            <div class="grid-item"><img src="img/19e5c5bb-f5d9-4f1f-83a9-21afd5cc79df.png" alt=""></div>
-            <div class="grid-item"><img src="img/5a85a7f6-edd8-4fa9-a346-9ca22eea1fd0.png" alt=""></div>
-            <div class="grid-item"><img src="img/5feafe4d9e1e2315030b6cabebd64a29.jpg" alt=""></div>
-            <div class="grid-item"><img src="img/dc94078ec17a896d5f7e9653ef17d74d.png" alt=""></div>
-            <div class="grid-item"><img src="img/f3c0b89c-ae3d-44a8-bd9b-6885f6b04401.png" alt=""></div>
-            <div class="grid-item"><img src="img/hero_jpgbring.jpeg" alt=""></div>
-            <div class="grid-item"><img src="img/19e5c5bb-f5d9-4f1f-83a9-21afd5cc79df.png" alt=""></div>
-            <div class="grid-item"><img src="img/5a85a7f6-edd8-4fa9-a346-9ca22eea1fd0.png" alt=""></div>
+        <div class="grid-columns">
+            <!-- Column 1 - Slow -->
+            <div class="grid-column" data-speed="0.5">
+                <div class="grid-item"><img src="img/19e5c5bb-f5d9-4f1f-83a9-21afd5cc79df.png" alt=""></div>
+                <div class="grid-item"><img src="img/5a85a7f6-edd8-4fa9-a346-9ca22eea1fd0.png" alt=""></div>
+                <div class="grid-item"><img src="img/5feafe4d9e1e2315030b6cabebd64a29.jpg" alt=""></div>
+                <div class="grid-item"><img src="img/dc94078ec17a896d5f7e9653ef17d74d.png" alt=""></div>
+                <!-- Duplicera för infinite scroll -->
+                <div class="grid-item"><img src="img/19e5c5bb-f5d9-4f1f-83a9-21afd5cc79df.png" alt=""></div>
+                <div class="grid-item"><img src="img/5a85a7f6-edd8-4fa9-a346-9ca22eea1fd0.png" alt=""></div>
+            </div>
+            
+            <!-- Column 2 - Medium -->
+            <div class="grid-column" data-speed="0.7">
+                <div class="grid-item"><img src="img/f3c0b89c-ae3d-44a8-bd9b-6885f6b04401.png" alt=""></div>
+                <div class="grid-item"><img src="img/hero_jpgbring.jpeg" alt=""></div>
+                <div class="grid-item"><img src="img/dc94078ec17a896d5f7e9653ef17d74d.png" alt=""></div>
+                <div class="grid-item"><img src="img/3ee8bdffe77d8060f98c5243e3ae5f91.jpg" alt=""></div>
+                <!-- Duplicera -->
+                <div class="grid-item"><img src="img/f3c0b89c-ae3d-44a8-bd9b-6885f6b04401.png" alt=""></div>
+                <div class="grid-item"><img src="img/hero_jpgbring.jpeg" alt=""></div>
+            </div>
+            
+            <!-- Column 3 - Fast -->
+            <div class="grid-column" data-speed="1.0">
+                <div class="grid-item"><img src="img/19e5c5bb-f5d9-4f1f-83a9-21afd5cc79df.png" alt=""></div>
+                <div class="grid-item"><img src="img/5a85a7f6-edd8-4fa9-a346-9ca22eea1fd0.png" alt=""></div>
+                <div class="grid-item"><img src="img/f3c0b89c-ae3d-44a8-bd9b-6885f6b04401.png" alt=""></div>
+                <div class="grid-item"><img src="img/bodybacknonetextcc5e966b-e35c-4831-afaa-18069d20a5f0_upscayl_6x_upscayl-standard-4x.png" alt=""></div>
+                <!-- Duplicera -->
+                <div class="grid-item"><img src="img/19e5c5bb-f5d9-4f1f-83a9-21afd5cc79df.png" alt=""></div>
+                <div class="grid-item"><img src="img/5a85a7f6-edd8-4fa9-a346-9ca22eea1fd0.png" alt=""></div>
+            </div>
+
+            <!-- Column 4 - Very Fast -->
+            <div class="grid-column" data-speed="1.3">
+                <div class="grid-item"><img src="img/dc94078ec17a896d5f7e9653ef17d74d.png" alt=""></div>
+                <div class="grid-item"><img src="img/5feafe4d9e1e2315030b6cabebd64a29.jpg" alt=""></div>
+                <div class="grid-item"><img src="img/hero_jpgbring.jpeg" alt=""></div>
+                <div class="grid-item"><img src="img/3ee8bdffe77d8060f98c5243e3ae5f91.jpg" alt=""></div>
+                <!-- Duplicera -->
+                <div class="grid-item"><img src="img/dc94078ec17a896d5f7e9653ef17d74d.png" alt=""></div>
+                <div class="grid-item"><img src="img/5feafe4d9e1e2315030b6cabebd64a29.jpg" alt=""></div>
+            </div>
         </div>
     </section>
 
@@ -129,55 +162,57 @@
             scrollTrigger: {
                 trigger: '.hero',
                 start: 'top top',
-                end: '+=400%',
+                end: '+=250%',
                 scrub: 1,
                 pin: true,
                 markers: true,
                 snap: {
-                    snapTo: [0, 0.5, 1],
+                    snapTo: [0, 1], // Antingen start eller hela vägen till blog-grid
                     duration: { min: 0.5, max: 1.5 },
                     ease: 'power2.inOut'
                 }
             }
         });
         
-        // Zoom TABLE (0-50% av timeline)
+        // Zoom TABLE (0-70% av timeline)
         zoomTimeline.to('.hero-content h1', {
             scale: 50,
             x: '290%',
-            duration: 0.5,
+            duration: 0.7,
             ease: 'power4.in',
             transformOrigin: 'center center'
         });
         
-        // Fade in blog grid (0-50%)
-        zoomTimeline.to('.blog-grid', {
-            opacity: 1,
-            duration: 0.5,
-            ease: 'power4.in'
-        }, 0);
-        
-        // Rotate grid (0-50%)
-        zoomTimeline.to('.grid-container', {
-            rotation: 720,
-            duration: 0.5,
-            ease: 'power4.in'
-        }, 0);
-        
-        // Fade out TABLE completely (50-70%)
+        // Fade out TABLE completely (70-90%)
         zoomTimeline.to('.hero-content h1', {
             opacity: 0,
             duration: 0.2
-        }, 0.5);
+        }, 0.7);
         
-        // Fade out video (50-70%)
+        // Fade out video (70-100%)
         zoomTimeline.to('.hero-video', {
             opacity: 0,
-            duration: 0.2
-        }, 0.5);
+            duration: 0.3
+        }, 0.7);
+
+        // Scroll-driven parallax - olika hastigheter, ingen autoscroll
+        const columns = document.querySelectorAll('.grid-column');
         
-        // Unpinning space (70-100%)
-        zoomTimeline.to({}, { duration: 0.3 });
+        columns.forEach((column) => {
+            const speed = parseFloat(column.dataset.speed);
+            
+            gsap.to(column, {
+                y: () => -(speed * 150) + '%',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.blog-grid',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1,
+                    invalidateOnRefresh: true
+                }
+            });
+        });
     </script>
     
 </body>
