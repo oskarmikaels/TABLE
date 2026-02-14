@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TABLE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    
+        <!-- ROTATING CITIES MARQUEE -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <span class="marquee-content">
+                UMEÅ • STOCKHOLM • NEW ORLEANS • PARIS • HAVANA • TOKYO • RIO DE JANEIRO • BERLIN • ISTANBUL • CAPE TOWN • BARCELONA • MONTREAL • LAGOS • COPENHAGEN • VIENNA • BUENOS AIRES • MARRAKECH • PRAGUE • LISBON • AMSTERDAM • JAZZ CITY • ACCRA • SYDNEY • NAIROBI • SEOUL • BAMAKO • HAVANA • OSLO • HELSINKI • GOTHENBURG • 
+            </span>
+            <span class="marquee-content">
+                UMEÅ • STOCKHOLM • NEW ORLEANS • PARIS • HAVANA • TOKYO • RIO DE JANEIRO • BERLIN • ISTANBUL • CAPE TOWN • BARCELONA • MONTREAL • LAGOS • COPENHAGEN • VIENNA • BUENOS AIRES • MARRAKECH • PRAGUE • LISBON • AMSTERDAM • JAZZ CITY • ACCRA • SYDNEY • NAIROBI • SEOUL • BAMAKO • HAVANA • OSLO • HELSINKI • GOTHENBURG • 
+            </span>
+        </div>
+    </div>
+
+    <!-- Live Clock -->
+        <div class="live-clock">
+            <span id="time">--:--:--</span>
+            <span class="timezone"></span>
+        </div>
+
+    <!-- LOCATION STATEMENT -->
+    <div class="location-statement">
+        <div class="location-line">BROADCASTING SWEDEN</div>
+        <div class="location-line">CONNECTED GLOBALLY</div>
+    </div>
+    
+    <!-- HERO SECTION -->
+    <section class="hero">
+        
+        <!-- Background Video -->
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="videos/hero-amber-loop-weboptimized.mp4" type="video/mp4">
+        </video>
+        
+        <!-- Hero Content Overlay -->
+        <div class="hero-content">
+            <h1>TABLE</h1>
+        </div>
+
+        
+        
+    </section>
+
+    </section>
+
+   <!-- BLOG GRID (bakom TABLE-texten) -->
+    <section class="blog-grid">
+        <div class="grid-container">
+            <div class="grid-item"><img src="img/19e5c5bb-f5d9-4f1f-83a9-21afd5cc79df.png" alt=""></div>
+            <div class="grid-item"><img src="img/5a85a7f6-edd8-4fa9-a346-9ca22eea1fd0.png" alt=""></div>
+            <div class="grid-item"><img src="img/5feafe4d9e1e2315030b6cabebd64a29.jpg" alt=""></div>
+            <div class="grid-item"><img src="img/dc94078ec17a896d5f7e9653ef17d74d.png" alt=""></div>
+            <div class="grid-item"><img src="img/f3c0b89c-ae3d-44a8-bd9b-6885f6b04401.png" alt=""></div>
+            <div class="grid-item"><img src="img/hero_jpgbring.jpeg" alt=""></div>
+            <div class="grid-item"><img src="img/19e5c5bb-f5d9-4f1f-83a9-21afd5cc79df.png" alt=""></div>
+            <div class="grid-item"><img src="img/5a85a7f6-edd8-4fa9-a346-9ca22eea1fd0.png" alt=""></div>
+        </div>
+    </section>
+
+    <!-- GSAP Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Live Clock Update
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Auto-stretch text to same width
+        function stretchTextToBox() {
+            const line1 = document.querySelectorAll('.location-line')[0];
+            const line2 = document.querySelectorAll('.location-line')[1];
+            const clock = document.querySelector('.live-clock');
+            
+            if (!line1 || !line2 || !clock) return;
+            
+            line1.style.transform = 'none';
+            line2.style.transform = 'none';
+            clock.style.transform = 'none';
+            
+            line1.offsetHeight;
+            line2.offsetHeight;
+            clock.offsetHeight;
+            
+            const w1 = line1.getBoundingClientRect().width;
+            const w2 = line2.getBoundingClientRect().width;
+            
+            const maxW = Math.max(w1, w2);
+            
+            line1.style.transformOrigin = 'left center';
+            line2.style.transformOrigin = 'left center';
+            clock.style.transformOrigin = 'left center';
+            
+            const statementWeightScale = 1.06;
+            line1.style.transform = 'scaleX(' + (maxW / w1 * statementWeightScale) + ')';
+            line2.style.transform = 'scaleX(' + (maxW / w2 * 1.08 * statementWeightScale) + ')';
+            clock.style.transform = 'none';
+        }
+        
+        document.fonts.ready.then(function() {
+            setTimeout(stretchTextToBox, 300);
+        });
+        
+        window.addEventListener('resize', stretchTextToBox);
+
+        // GSAP ScrollTrigger - Zoom into TABLE
+        gsap.registerPlugin(ScrollTrigger);
+        
+        const zoomTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: '.hero',
+                start: 'top top',
+                end: '+=400%',
+                scrub: 1,
+                pin: true,
+                markers: true,
+                snap: {
+                    snapTo: [0, 0.5, 1],
+                    duration: { min: 0.5, max: 1.5 },
+                    ease: 'power2.inOut'
+                }
+            }
+        });
+        
+        // Zoom TABLE (0-50% av timeline)
+        zoomTimeline.to('.hero-content h1', {
+            scale: 50,
+            x: '290%',
+            duration: 0.5,
+            ease: 'power4.in',
+            transformOrigin: 'center center'
+        });
+        
+        // Fade in blog grid (0-50%)
+        zoomTimeline.to('.blog-grid', {
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power4.in'
+        }, 0);
+        
+        // Rotate grid (0-50%)
+        zoomTimeline.to('.grid-container', {
+            rotation: 720,
+            duration: 0.5,
+            ease: 'power4.in'
+        }, 0);
+        
+        // Fade out TABLE completely (50-70%)
+        zoomTimeline.to('.hero-content h1', {
+            opacity: 0,
+            duration: 0.2
+        }, 0.5);
+        
+        // Fade out video (50-70%)
+        zoomTimeline.to('.hero-video', {
+            opacity: 0,
+            duration: 0.2
+        }, 0.5);
+        
+        // Unpinning space (70-100%)
+        zoomTimeline.to({}, { duration: 0.3 });
+    </script>
+    
+</body>
+</html>

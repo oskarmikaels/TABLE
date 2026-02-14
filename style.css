@@ -1,0 +1,243 @@
+/* Importera Moniqa font */
+
+@font-face {
+    font-family: 'Moniqa';
+    src: url('fonts/Harmond-ExtraBoldExpanded.otf') format('truetype');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'MilkyWalky';
+    src: url('fonts/MilkyWalky-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Ranade';
+    src: url('fonts/Ranade-Variable.ttf') format('truetype');
+}
+
+/* Reset och grundinställningar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Moniqa', sans-serif;
+    overflow-x: hidden;
+}
+
+/* ROTATING CITIES MARQUEE */
+.marquee-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 0.2rem 0 0.2rem 0;
+    z-index: 100;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+}
+
+.marquee {
+    display: flex;
+    white-space: nowrap;
+    will-change: transform;
+}
+
+.marquee-content {
+    display: inline-block;
+    padding-right: 2rem;
+    font-family: 'MilkyWalky', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #CC7700;
+    transform: scaleX(0.6);
+    animation: scroll-marquee 90s linear infinite;
+}
+
+/* Marquee scroll animation */
+@keyframes scroll-marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause on hover */
+.marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+/* Live Clock - auto stretch */
+.live-clock {
+    position: fixed;
+    top: 4.4rem;
+    left: 1rem;
+    z-index: 99;
+    display: flex;
+    gap: 0.28rem;
+    align-items: baseline;
+    color: #CC7700;
+    white-space: nowrap;
+}
+
+#time {
+    font-family: 'MilkyWalky', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.7rem;
+}
+
+.timezone {
+    font-family: 'MilkyWalky', sans-serif;
+    font-weight: 300;
+    font-size: 0.6rem;
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* LOCATION STATEMENT OCH CLOCK - AUTO STRETCH */
+.location-statement {
+    position: fixed;
+    top: 3rem;
+    left: 1rem;
+    z-index: 99;
+    line-height: 1.1;
+}
+
+.location-line {
+    font-family: 'MilkyWalky', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: rgba(204, 119, 0, 0.8);
+    text-transform: uppercase;
+    display: block;
+    white-space: nowrap;
+}
+
+/* HERO SECTION */
+.hero {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Background Video */
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Hero Content Overlay */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    mix-blend-mode: screen;
+}
+
+.hero-content h1 {
+    font-size: 13.7rem;
+    font-weight: 300;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: -0.15em;
+    transform: scaleX(0.53);
+
+    /* Animerad gradient som matchar videon */
+    background: linear-gradient(
+        45deg,
+        #5C0000,  /* Mörkare djupröd */
+        #CC3300,  /* Mörkare orange-röd */
+        #CC7700,  /* Mörkare guld/amber */
+        #A0441A,  /* Mörkare bränd orange */
+        #5C2D0F,  /* Mörkare brun */
+        #5C0000   /* Tillbaka till röd (för loop) */
+    );
+    background-size: 300% 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Animationen */
+    animation: gradient-shift 15s ease infinite;
+}
+
+/* Gradient animation */
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* BLOG GRID SECTION */
+.blog-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    opacity: 0.3;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 2rem;
+    height: 100%;
+    animation: rotate-grid 20s linear infinite;
+}
+
+.grid-item {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Rotation animation */
+@keyframes rotate-grid {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
