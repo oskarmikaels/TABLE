@@ -154,6 +154,7 @@ body {
     position: relative;
     z-index: 2;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
@@ -161,12 +162,12 @@ body {
 }
 
 .hero-content h1 {
-    font-size: 13.7rem;
+    font-size: 10rem;
     font-weight: 300;
     color: white;
     text-transform: uppercase;
     letter-spacing: -0.15em;
-    transform: scaleX(0.53);
+    transform: scale(0.53, 0.5) translateY(-200px); /* Extrem för test: mycket smalare och högre upp */
 
     /* Animerad gradient som matchar videon */
     background: linear-gradient(
@@ -185,6 +186,15 @@ body {
     
     /* Animationen */
     animation: gradient-shift 15s ease infinite;
+}
+
+.hero-logo {
+    width: 600px; /* Ökad storlek från 200px till 600px */
+    height: auto;
+    margin-bottom: 2rem; /* Mellanrum mellan logo och text */
+    filter: invert(1) brightness(2) saturate(1); /* Gör logon helt svart */
+    opacity: 1; /* Full opacitet för bättre synlighet */
+    mix-blend-mode: overlay; /* Mjukare blending med bakgrunden */
 }
 
 /* Gradient animation */
